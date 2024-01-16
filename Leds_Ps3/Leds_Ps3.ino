@@ -13,36 +13,13 @@
 #include <Ps3Controller.h>
 
 // Define LED Pins
-#define LED1_PIN 4
-#define LED2_PIN 16
 #define LED3_PIN 15
 
 // Variables to hold LED states
-bool led1State = false;
-bool led2State = false;
 bool led3State = false;
 
 // Callback Function
 void notify() {
-
-  // Cross button - LED1 momentary control
-  if (Ps3.event.button_down.cross) {
-    Serial.println("Cross pressed");
-    led1State = true;
-    digitalWrite(LED1_PIN, led1State);
-  }
-  if (Ps3.event.button_up.cross) {
-    Serial.println("Cross released");
-    led1State = false;
-    digitalWrite(LED1_PIN, led1State);
-  }
-
-  // Triangle Button - LED2 toggle control
-  if (Ps3.event.button_down.triangle) {
-    Serial.println("Triangle presssed");
-    led2State = !led2State;
-    digitalWrite(LED2_PIN, led2State);
-  }
 
   // Square Button - LED3 on
   if (Ps3.event.button_down.square) {
@@ -78,8 +55,6 @@ void setup() {
   Ps3.begin("00:00:00:00:00:00");
 
   // Set LED pins as outputs
-  pinMode(LED1_PIN, OUTPUT);
-  pinMode(LED2_PIN, OUTPUT);
   pinMode(LED3_PIN, OUTPUT);
 
   // Print to Serial Monitor
