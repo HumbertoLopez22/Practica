@@ -16,10 +16,20 @@
 #define LED3_PIN 15
 
 // Variables to hold LED states
+bool led2State = false;
 bool led3State = false;
 
 // Callback Function
 void notify() {
+
+  // Cross button - LED1 momentary control
+
+  // Triangle Button - LED2 toggle control
+  if (Ps3.event.button_down.triangle) {
+    Serial.println("Triangle presssed");
+    led2State = !led2State;
+    digitalWrite(LED2_PIN, led2State);
+  }
 
   // Square Button - LED3 on
   if (Ps3.event.button_down.square) {
@@ -55,6 +65,7 @@ void setup() {
   Ps3.begin("00:00:00:00:00:00");
 
   // Set LED pins as outputs
+  pinMode(LED2_PIN, OUTPUT);
   pinMode(LED3_PIN, OUTPUT);
 
   // Print to Serial Monitor
